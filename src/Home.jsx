@@ -1,6 +1,7 @@
 import React from "react";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import SectionOne from "./conponents/SectionOne";
 
 const Homepage = () => {
   const comp = useRef(null);
@@ -12,6 +13,7 @@ const Homepage = () => {
       // 初期状態を設定
       gsap.set("#page1-page", { opacity: 0 });
       gsap.set("#header", { opacity: 0 });
+      gsap.set("#header-nav", { opacity: 0 });
       
       // イントロスライダーアニメーション
       tl.from("#intro-slider", {
@@ -57,6 +59,11 @@ const Homepage = () => {
         opacity: 1,
         duration: 0.5,
       })
+
+      .to("#header-nav", {
+        opacity: 1,
+        duration: 0.5,
+      })
       
       // ページ1表示
       .to("#page1-page", {
@@ -87,12 +94,21 @@ const Homepage = () => {
         </h1>
       </div>
       
-      {/* 共通ヘッダー要素（固定） */}
-      <header id="header" className="fixed top-0 right-0 p-4 z-30">
-        <div id="logo" className="w-16 h-16 bg-gray-800 text-white flex items-center justify-center rounded-full">
-          LOGO
-        </div>
-      </header>
+      <div>
+        <nav className="h-20 flex items-center justify-between px-12 py-10 border-b border-b-[rgba(1,1,1,.1)]">
+          <div>
+            <p>Bingo</p>
+          </div>
+          <ul className="flex items-center gap-10">
+            <li>Home</li>
+            <li>Strategy</li>
+            <li>About</li>
+            <li>Clients</li>
+          </ul>
+          <div className="flex items-center gap-10">Signup</div>
+        </nav>
+        <SectionOne />
+      </div>
       
       {/* Welcomeページ */}
       <section id="welcome-page" className="h-screen w-full absolute top-0 left-0 flex bg-gray-950 justify-center items-center z-5">
@@ -100,13 +116,7 @@ const Homepage = () => {
           Welcome
         </h1>
       </section>
-      
-      {/* ページ1 - 最初は非表示だがCSSでは指定せず、GSAPで制御 */}
-      <section id="page1-page" className="h-screen w-full absolute top-0 left-0 flex bg-white justify-center items-center z-1">
-        <h1 id="page1" className="text-9xl font-bold text-gray-950 font-shareTech">
-          This is Page 1
-        </h1>
-      </section>
+
     </div>
   );
 };
